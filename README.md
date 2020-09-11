@@ -20,22 +20,22 @@ YelpCamp is a website to create and review campgrounds. This project was taken u
 
 ###Client-side
 
--ejs
--css
--Bootstrap
+- ejs
+- css
+- Bootstrap
 
 ###Server-side
 
--NodeJs
--Express.js
--MongoDB
--body-parser
--connect-flash
--dotenv
--express
--express-session
--method-override
--mongoose
--passport
--passport-local
--passport-local-mongoose
+- NodeJs
+- Express.js
+- MongoDB
+- body-parser
+- connect-flash
+- dotenv
+- express
+- express-session
+- method-override
+- mongoose
+- passport
+- passport-local
+- passport-local-mongoose
