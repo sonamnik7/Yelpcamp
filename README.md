@@ -4,13 +4,13 @@ YelpCamp is a website to create and review campgrounds. This project was taken u
 
 ## Features
 
-###Authorization:
+### Authorization:
 
 - User login and signup using username and password
 
 - User must be logged in to post comment or campground or like the campground.
 
-###Authentication:
+### Authentication:
 
 - Needed to edit and delete campgrounds and comments posted by authorized user.
 
@@ -18,13 +18,13 @@ YelpCamp is a website to create and review campgrounds. This project was taken u
 
 ## Technologies used
 
-###Client-side
+### Client-side
 
 - ejs
 - css
 - Bootstrap
 
-###Server-side
+### Server-side
 
 - NodeJs
 - Express.js
