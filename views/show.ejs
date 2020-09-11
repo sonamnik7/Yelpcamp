@@ -1,0 +1,134 @@
+<%- include ("partials/header") %>
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">YelpCamp</p>
+            <div class="list-group">
+                <li class="list-group-item">NAME : <%=c.name%></li>
+                <li class="list-group-item">COST : $<%=c.cost%>/night</li>
+                <br>
+                <li class="list-group-item">BY : <%= c.author.username %></li>
+                <li class="list-group-item">Phone Number : <%= c.phone %></li>
+                <br>
+                <li class="list-group">Camping season 
+                    <li class="list-group-item">starts in : <%= c.start %></li>
+                    <li class="list-group-item">ends in : <%= c.end %></li>
+                </li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive img-fluid" src="<%=c.image %>">
+                <div class="caption-full">
+                    <!-- <p class="pull-right">$<%=//c.cost%>/night</p>  -->
+                    <!-- <h2><a><%=//c.name%></a></h2> -->
+					
+                    <div style="padding-top: 5px; ">
+						<div class="pull-right" style="display:inline;">
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal"
+                                data-target="#campgroundLikes">
+                            <span>Total likes: <i class="fas fa-thumbs-up"></i> <%= c.likes.length %></span>
+                        </button>
+                    	</div>
+                        <form action="/clist/<%= c._id %>/like" method="POST" style="display:inline;">
+                            <div class="btn-group">
+                                <% if (currentUser && c.likes.some(function (like) {
+                                    return like.equals(currentUser._id)
+                                })) { %>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-thumbs-up"></i> Liked
+                                </button>
+                                <% } else { %>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-thumbs-up"></i> Like 
+                                </button>
+                                <% } %>
+                                <!-- <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal"
+                                        data-target="#campgroundLikes">See more details
+                                </button> -->
+                            </div>
+                        </form>
+                    </div>
+					<!-- <h4>
+						Description:
+					</h4> -->
+                    <p><%= c.content  %></p>
+                    <!-- <p>
+                        <em>Submitted By :<%= //c.author.username %></em>
+                    </p> -->
+                    <% if(currentUser && c.author.id.equals(currentUser._id)){ %>
+                        <a class="btn btn-outline-secondary" href='/clist/<%=c._id%>/edit'>Edit</a>
+                        <form id="delete-form" action="/clist/<%=c._id%>?_method=DELETE" method="POST" style="display:inline";>
+                            <button class="btn btn-outline-secondary">Delete</button>
+                        </form>
+                    <% }%>
+                </div>
+            </div>
+			 <hr>
+            <div class="well">
+				<h2 style="display:inline"; >Comments:</h2>
+                <div class="text-right" style="display:inline; float:right;">
+                    <a class="btn btn-success" href='/clist/<%=c._id%>/comment/new' >Add New Comment</a>
+                </div>
+                <hr>
+                <% c.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><%= comment.author.username %></strong>
+                            <!-- <span class="pull-right">10 days ago</span> -->
+                            <p>
+                                <%= comment.text %> 
+                            </p>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-outline-secondary btn-sm"
+                              href='/clist/<%=c._id%>/comment/<%=comment._id%>/edit'>Edit</a>
+                            <form id="delete-form" action="/clist/<%=c._id%>/comment/<%=comment._id%>?_method=DELETE" method="POST" style="display:inline;" >
+                                <input type="submit" class="btn btn-outline-secondary btn-sm" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Campground Likes Modal -->
+<div id="campgroundLikes" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h4 class="modal-title">Campground likes: <%= c.likes.length %></h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Liked by:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% c.likes.forEach(function(like) { %>
+                        <tr>
+                            <td><span class="badge"><i class="fas fa-user"></i></span> <%= like.username %></td>
+                        </tr>
+                    <% }); %>
+                    <% if (c.likes.length === 0) { %>
+                        <tr>
+                            <td><em>No likes yet.</em></td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include ("partials/footer") %>

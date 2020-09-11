@@ -1,0 +1,36 @@
+<%- include ("partials/header") %>
+<div class="container pt-5">
+	<h1>
+	Form to add new campground
+	</h1>
+<form action="/clist" method="POST">
+  <div class="form-group">
+    <label for="name">Title</label>
+    <input type="text" name="camp[name]" class="form-control" id="name" placeholder="name" required>
+  </div>
+  <div class="form-group">
+    <label for="img">Image</label>
+    <input type="text" name="camp[image]" class="form-control" id="img" placeholder="image URL" required>
+  </div>
+	 <div class="form-group">
+    <label for="content">Description</label>
+    <textarea class="form-control" name="camp[content]" id="content" rows="3" required></textarea>
+  </div>
+	<div class="form-group">
+  <input class="form-control" type="number" name="camp[cost]" placeholder="cost" step="0.01" min="0" required>
+</div>
+<div class="form-group">
+  <input class="form-control" type="number" name="camp[phone]" placeholder="Phone no" step="1" min="100" required>
+</div>
+<div class="form-group">
+  <input class="form-control" type="text" name="camp[start]" placeholder="season-start" required>
+</div>
+<div class="form-group">
+  <input class="form-control" type="text" name="camp[end]" placeholder="season-end" required>
+</div>
+  
+  <button type="submit" class="btn btn-outline-secondary">Submit</button>
+</form>
+</div>
+
+<%- include ("partials/footer") %>

@@ -1,0 +1,17 @@
+<%- include ("partials/header") %>
+<div class="container pt-5">
+
+<h1>
+	Add a comment
+</h1>
+<form action="/clist/<%=a%>/comment" method="POST" style="display:inline">
+	<div class="form-group">
+    <label for="formGroupExampleInput">Your comment</label>
+    <input type="text"  placeholder="comment" name="comment[text]" class="form-control" id="formGroupExampleInput">
+  </div>
+	<input type="submit" class="btn btn-outline-secondary">
+
+</form>
+<a href="/clist/<%=a%>" class="btn btn-outline-secondary btn-sm" style="border:none">Back</a>
+</div>
+<%- include ("partials/footer") %>
